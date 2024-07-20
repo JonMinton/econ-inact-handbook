@@ -1,0 +1,55 @@
+project:
+  type: website
+
+website:
+  title: "Economic (In)Activity Modelling Resources"
+  navbar:
+    logo: assets/img/smaller-transparent-mini-logo.png
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - text: "Concepts"
+        menu:
+          - href: pages/concepts/economic-inactivity.qmd
+            text: "Economic Inactivity"
+          - href: pages/concepts/pafs-and-safs.qmd
+            text: "PAFs and SAFs"
+      - text: "Code Examples"
+        menu:
+          - href: pages/code-examples/getting-descriptive-results-ukhls.qmd
+            text: "Getting descriptive results from UKHLS"
+          - href: pages/code-examples/building-foundational-model.qmd
+            text: "Building a foundational model"
+          - href: pages/code-examples/health-discrete.qmd
+            text: "Health as a discrete variable (Limiting Long-term Illness)"
+          - href: pages/code-examples/health-continuous.qmd
+            text: "Health as 2D continuous variable (SF-12)"
+          - href: pages/code-examples/calculating-pafs.qmd
+            text: "Calculating Population Attributable Fractions (PAFs)"
+          - href: pages/code-examples/calculating-safs.qmd
+            text: "Calculating Sequential Attributable Fractions (SAFs)"
+      - href: pages/working-papers.qmd
+        text: "Working Papers"
+      - href: pages/what-else-is-happening.qmd
+        text: "What Else is Happening?"
+  sidebar: 
+    style: "floating"
+    search: true
+    logo: https://github.com/Public-Health-Scotland/phstemplates/blob/main/inst/images/phs-logo.png?raw=true
+    contents: 
+      - href: pages/model-approach.qmd
+        text: "Model Approach"
+      - href: pages/data.qmd
+        text: "Data Sources"
+      - href: pages/registering-for-UKHLS-special-licence.qmd
+        text: "UKHLS Special Licence"
+      - href: pages/model-repository.qmd
+        text: "Model Repository"
+format:
+  html:
+    theme: cosmo
+    css: phs_style.css
+    toc: true
+
+

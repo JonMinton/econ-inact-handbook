@@ -1,0 +1,30 @@
+---
+title: "About the Economic Inactivity Project"
+---
+
+This online handbook is intended to be a guide to understanding and using a modelling framework for simulating the effects of changes to determinants of economic inactivity to representative UK populations' levels of economic inactivity, and so to estimating the contribution that specific factors have on the levels and types of economic activity and inactivity experienced by working populations in the UK. 
+
+## Primary aim of project
+
+The main aim of the project is to come up with reasonable estimates to questions of the form:
+
+> How much of the observed economic (in)activity in the UK population is due to one or more specific and potentially modifiable factors?
+
+This is in effect asking for calculation of population attributable fractions (PAFs) and sequential attributable fractions (SAFs). For example:
+
+> How much sickness related economic inactivity is explained by poor health?
+
+> How much unemployment is explained by poor work conditions?
+
+> How much employment is explained by job density?
+
+
+
+## Data Used
+
+We use the UKHLS.
+
+## Codebase
+
+Our codebase is available [here](https://github.com/JonMinton/economic_inactivity)
+

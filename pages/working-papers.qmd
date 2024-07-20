@@ -1,0 +1,4 @@
+## Working papers and presentations 
+
+- Methods paper 
+- [Quarto presentation](https://rpubs.com/JonMinton/edinbr-econinact)

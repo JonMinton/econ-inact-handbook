@@ -1,0 +1,23 @@
+## Data
+
+This section will discuss the data sources used and how to access them
+
+## UKHLS
+
+The main data source used is the UKHLS, which ... 
+
+## UKHLS - Special Licence
+
+Discuss how to get the Special Licence and the data it contains
+
+
+## Setting up repo with appropriate data
+
+After cloning the project repository, the user will need to do the following to their local copy of the repository:
+
+- create a folder in the root directory called `big_data`
+- Download the zipped file for UKHLS from the UK Data Archive which has the code `6614`, and in *stata* format.
+- Unzip this zipped file from the UKHLS and place it in the `big_data` directory. This should create a new folder called `UKDA-6614-stata`
+
+The required UKDS UKHLS data should now be in the correct location for the functions within the project repository to work
+

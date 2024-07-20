@@ -1,0 +1,188 @@
+## Example workflow for creating a model 
+
+This section will show typical code required to create the type of model used to project economic (in)activity states in the period ahead for individuals. This is assuming the repository have been cloned to a local directory and the requisite UKHLS dataset has been downloaded, unzipped and placed in the correct relative directory. The repository should be opened as an R Project in RStudio, and the package loaded to ensure the convenience functions are accessible. 
+
+Once the repository and data are set up correctly, the script below does the following:
+
+- Loads the data from the UKHLS raw data
+- Selects only those variables of interest
+    - `jbstat`: economic (in)activity status
+    - `dvage` : age in years
+    - `sex` : sex
+    - `sf12mcs_dv`: SF-12 Mental Health Score component
+    - `sf12pcs_dv`: SF-12 Physical Health Score component
+- Creates the foundational model with the following specification and calls it `mod_00`:
+    - `next_status ~ this_status * sex + splines::bs(age, 5)`
+- Creates four possible extended model specifications including health in different ways, and saves them as `mod_01`, `mod_02`, `mod_03`, `mod_04`
+- Compares the penalised model fit of all five model specifications to determine if 1) any extended model specification out-performs the baseline specification; 2) which of the extended model specifications are 'best' according to the AIC and BIC metrics. 
+- Produces a hypothetical reference population based on the last pre-pandemic wave's observations
+- Modifies the exposure variables of interest in the above to create a counterfactual population in which health has been improved
+- Produces estimates of the effect that improving health has on the distribution of persons in different economic activity states
+- Summarises these above estimates at population level
+
+
+
+
+This example is largely lifted from [this quarto notebook](https://github.com/JonMinton/economic_inactivity/blob/main/notebooks/18_revised_modelling.qmd) in the main project reposistory: 
+
+
+```r
+
+library(tidyverse)
+# library(haven)
+# library(here)
+library(nnet)
+
+# devtools::load_all(here('R'))
+# base_dir_location <- "big_data/UKDA-6614-stata/stata/stata13_se/ukhls"
+# indresp_files <- dir(here(base_dir_location), pattern = "[a-z]_indresp.dta", full.names = TRUE)
+
+varnames <-  c(
+  "jbstat", "dvage", "sex", "sf12mcs_dv", "sf12pcs_dv" #, "ethn_dv"
+  )
+
+vartypes <- c(
+  "labels", "values", "labels", "values", "values" #, "labels"
+  )
+
+df_ind <- get_ind_level_vars_for_selected_waves(varnames = varnames, vartypes = vartypes, waves = letters[1:11])
+
+# Clean the data 
+df_ind_mhph_standardised <- 
+  df_ind |> 
+    mutate(across(dvage:sf12pcs_dv, function(x) ifelse(x < 0, NA, x))) %>% 
+    filter(complete.cases(.)) |> 
+    rename(age = dvage) |> 
+    filter(between(age, 16, 64)) |> 
+    group_by(wave) |> 
+    mutate(z_mh = standardise_scores(sf12mcs_dv),
+           z_ph = standardise_scores(sf12pcs_dv)
+    ) |> 
+    ungroup() |> 
+    select(-sf12mcs_dv, -sf12pcs_dv)
+
+```
+
+Build the model
+
+```r
+mod_00 <- 
+  nnet::multinom(
+    next_status ~ this_status * sex + splines::bs(age, 5),
+    data = df_ind_mhph_standardised
+  )
+
+mod_01 <- 
+  nnet::multinom(
+    next_status ~ this_status * sex + splines::bs(age, 5) + z_mh,
+    data = df_ind_mhph_standardised
+  )
+
+mod_02 <- 
+  nnet::multinom(
+    next_status ~ this_status * sex + splines::bs(age, 5) + z_ph,
+    data = df_ind_mhph_standardised
+  )
+
+mod_03 <- 
+  nnet::multinom(
+    next_status ~ this_status * sex + splines::bs(age, 5) + z_mh + z_ph,
+    data = df_ind_mhph_standardised
+  )
+
+mod_04 <- 
+  nnet::multinom(
+    next_status ~ this_status * sex + splines::bs(age, 5) + z_mh * z_ph,
+    data = df_ind_mhph_standardised
+  )
+
+```
+
+Compare penalised fit
+
+```r
+BIC(mod_00, mod_01, mod_02, mod_03, mod_04)
+AIC(mod_00, mod_01, mod_02, mod_03, mod_04)
+```
+
+Using status(T+1) regressed on status(T), and using the working age population only, the **interacting** joint model now has the lowest BIC and AIC.
+
+Of the single exposure models, the PH model has superior fit to the MH model.
+
+Let's now pick a wave. How about j again?
+
+```r
+
+baseline_scenario <- df_ind_mhph_standardised |> 
+  filter(wave == 'j')
+
+counterfactual_mh <- baseline_scenario |> 
+  mutate(z_mh = z_mh + 1)
+
+counterfactual_ph <- baseline_scenario |> 
+  mutate(z_ph = z_ph + 1)
+
+counterfactual_mhph <- baseline_scenario |> 
+  mutate(z_mh = z_mh + 1, z_ph = z_ph + 1)
+
+```
+
+Now to get predictions
+
+```r
+predictions_baseline <- predict(mod_04, newdata = baseline_scenario, type = "probs")
+predictions_counter_mh <- predict(mod_04, newdata = counterfactual_mh, type = "probs")
+predictions_counter_ph <- predict(mod_04, newdata = counterfactual_ph, type = "probs")
+predictions_counter_mhph <- predict(mod_04, newdata = counterfactual_mhph, type = "probs")
+
+
+```
+
+For each of these we can sum the rows to get the estimated next_status composition
+
+```r
+
+predictions_summary_matrix <-
+  
+  cbind(
+    # The number 2 indicates do the sum function for each column.
+    # If it were 1 then this would sum for each row (which should add up to 1 in call cases)
+    apply(predictions_baseline, 2, sum),
+    apply(predictions_counter_mh, 2, sum),
+    apply(predictions_counter_ph, 2, sum),
+    apply(predictions_counter_mhph, 2, sum)
+  )
+
+colnames(predictions_summary_matrix) <- c("base", "mh", "ph", "mh_ph")
+predictions_summary_matrix
+```
+
+We can make these relative to the baseline model
+
+```r
+sim_relative_change <- apply(
+    predictions_summary_matrix, 1, function(x) (100 * x / x[1])
+  ) |> 
+  t()
+
+sim_relative_change
+```
+
+Let's try to visualise this
+
+```r
+sim_relative_change |> 
+  as_tibble(rownames = "state") |> 
+  pivot_longer(-state, names_to = "scenario", values_to = "relative_size") |> 
+  ggplot(aes(y = state, x = relative_size, shape = scenario, colour = scenario)) + 
+  geom_point() + 
+  ggrepel::geom_text_repel(aes(label = round(relative_size)), nudge_y = 0.2) + 
+  geom_vline(xintercept = 100, linetype = "dashed") + 
+  labs(
+    x = "Size of population in state relative to baseline (100)",
+    y = "Economic (in)activity state",
+    title = "Estimated effect of mitigating mental health and physical health",
+    subtitle = "Using wave J. SF-12 MH and PH instruments.",
+    caption = "Source: UKHLS. Mitigation scenario: Improve scores by 1 standard deviation"
+  )
+```

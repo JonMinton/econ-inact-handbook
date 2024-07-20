@@ -1,0 +1,51 @@
+## Model repository
+
+The code required to work with the UKHLS data required by the model, and other code which actually runs the model, is available from [this repository](https://github.com/JonMinton/economic_inactivity/).
+
+### Package helper functions
+
+The repository is set up as a package, with code required to reshape the UKHLS data into the required format available in the R subdirectory [here](https://github.com/JonMinton/economic_inactivity/tree/main/R).
+
+Functions within this above link and their purposes are as follows:
+
+- `model_helpers.R`
+    - `calculate_absolute_baseline_counterfactual_distribution`
+    - `calculate_baseline_counterfactual_distribution`
+    - `plot_scenario_comparisons`
+    - `make_abs_colchart`
+    - `make_rel_barchart`
+    - `make_tabular_summary`
+- `ukhls_data_extractors.R`
+    - `convert_varname_selection_to_regex`
+    - `extract_vars_and_make_long`
+    - `extract_var_and_make_long`
+    - `read_and_slim_data`
+    - `extract_eq_income_and_num_dependents`
+    - `extract_pid_with_hid_and_wave`
+- `ukhls_data_reshapers.R`
+    - `smartly_widen_ind_dataframe`
+    - `rename_widen`
+    - `extract_ind_from_waves`
+    - `simplify_econ_status_categories`
+    - `pull_next_wave_status`
+    - `get_econ_status_next_wave_and_match_pidp`
+    - `get_ind_level_vars_for_selected_waves`
+    - `add_hh_variables`
+- `ukhls_helpers.R`
+    - `return_labels_as_factors`
+    - `get_col_labels`
+    - `get_labels_for_col`
+    - `standardise_scores`
+
+Each function is documented, and if the package is installed/loaded then help for each function should be accessible by writing (for example) `?standardise_scores` (for this named function)
+
+
+
+
+
+
+
+
+
+
+

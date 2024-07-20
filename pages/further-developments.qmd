@@ -1,0 +1,23 @@
+## Further developments
+
+There are a number of avenues for further developing this programme of work. 
+
+This includes: 
+
+- Small area geographic identifiers (requires UKHLS special licence)
+    - This would allow us to to better link individual respondents with local area and labour market conditions experienced at the time (for example linking to NOMIS to get jobs density and childcare availability)
+- Household level characteristics
+    - Household composition
+        - Part of the UKHLS. For example what differences are there between households with and without children in patterns of economic activity? 
+    - Household income
+        - Before and after housing costs
+    - Tenure
+        - Are there differences in economic activity patterns between private renters, social renters, those with a mortgage and those who own outright?
+    - Car availability
+        - What effects does having a car within the household have on economic inactivity? 
+- Labour Market
+    - Job Quality
+        - What effect do better quality jobs have on those employed remaining in employment?
+    - Wages
+    - Unionisation
+       

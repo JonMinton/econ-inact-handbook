@@ -1,0 +1,16 @@
+## Descriptive Statistics from the UKHLS
+
+The following shows some descriptive statistics from the UKHLS for waves `a` and `i`. 
+
+
+```{r}
+#| code-fold: true
+#| warning: false
+#| message: false
+library(tidyverse)
+
+df <- read_csv("../../assets/csv/summary_stats.csv")
+
+df |>
+    knitr::kable()
+```

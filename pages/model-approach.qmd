@@ -1,0 +1,14 @@
+## Foundational model
+
+We start by trying to adequately controlling for the following two types of factor:
+
+- Demographic factors, such as age and sex
+- Event history: i.e. the current observed economic (in)activity status that persons are observed to occupy at a given time point
+
+## Extended models
+
+An extended model adds one or more variables to the foundational model. These additional variables are the factors/determinants whose effect on economic (in)activity we are actually interested in estimating for both individuals and populations.
+
+### Health as a discrete and continuous variables
+
+The health extended model adds the variable '' for

@@ -1,0 +1,3 @@
+# Creating consistent economic activity categories between waves
+
+We cleaned the data and 
