@@ -1,6 +1,6 @@
 project:
   type: website
-
+  output-dir: docs
 website:
   title: "Economic (In)Activity Modelling Resources"
   navbar:
