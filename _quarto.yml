@@ -32,7 +32,7 @@ website:
       - href: pages/working-papers.qmd
         text: "Working Papers"
       - href: pages/what-else-is-happening.qmd
-        text: "What Else is Happening?"
+        text: "Other Initiatives"
   sidebar: 
     style: "floating"
     search: true
