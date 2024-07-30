@@ -1,10 +1,30 @@
 ## Data
 
-This section will discuss the data sources used and how to access them
+This section will discuss the data sources used and how to access them.
 
-## UKHLS
+## United Kingdom Household Longitudinal Study (UKHLS)
 
-The main data source used is the UKHLS, which ... 
+The main data source used is the United Kingdom Household Longitudinal Survey (UKHLS). 
+
+- We use data from ten waves of the UKHLS (2009-10 to 2018-19) to build the model used to predict economic status at the next wave. 
+- We then apply the model(s) to a single wave (wave i) of the UKHLS to ‘predict’ the composition of the population at the next wave.  
+
+We use variables from both the individual-level and household-level UKHLS files.
+
+The standard UKHLS file does not allow data to be linked to sub-regional markers (e.g. local authorities, Travel to Work Areas). To do this, we used two additional datasets:
+
+- [UKHLS, Special Licence Access, Local Authority District](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=6666&type=Data%20catalogue)
+- [UKHLS, Special Licence Access, Travel to Work Area](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=6675&type=Data%20catalogue)
+
+Open access data is available in the `big_data` folder.
+
+The special licence access files are available here. Note that anyone using the special licence files will need to complete an access form and notify the UK Data Archive.
+
+## Other data sources
+
+- Labour market demand: we used ‘jobs density’ data, available via the [NOMIS (official Census and labour market statistics)](https://www.nomisweb.co.uk/) website.
+- Childcare availability: we used [Childcare providers and inspections data for England from Ofsted](https://www.gov.uk/government/statistics/childcare-providers-and-inspections-as-at-31-march-2024). 
+
 
 ## UKHLS - Special Licence
 

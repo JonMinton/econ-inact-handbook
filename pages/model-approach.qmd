@@ -11,4 +11,9 @@ An extended model adds one or more variables to the foundational model. These ad
 
 ### Health as a discrete and continuous variables
 
-The health extended model adds the variable '' for
+The health extended model adds the variables:
+
+- **Discrete**: `health`: Do you have any long-standing physical or mental impairment, illness or disability? By 'long-standing' I mean anything that has troubled you over a period of at least 12 months or that is likely to trouble you over a period of at least 12 months. 
+- **Continuous**: `sf12mcs_dv` (SF-12 Mental Component Summary (MCS)) and `sf12pcs_dv` SF-12 Physical Component Summary (PCS). We standardise both scores. The version chosen was one both mental and physical health scores are included as an interactive term, where physical health contributed twice as strongly as mental health.
+
+

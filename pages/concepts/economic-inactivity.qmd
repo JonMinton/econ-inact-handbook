@@ -8,4 +8,5 @@ The population includes those who are:
 - **Economically inactive**: people not in employment but who do not meet the requirements for unemployment because they are not actively seeking or available for work.
 
 This data is collected routinely in the UK (including Scotland) through the Labour Force Survey. The Office for National Statistics has been working to improve the quality of the LFS since 2023.
+
 Economic status is a driver of health and health inequalities, and health is one reason why people can be economically inactive.
