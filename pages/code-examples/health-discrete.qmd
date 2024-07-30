@@ -165,6 +165,6 @@ tbl_mod_llti <-
 tbl_mod_llti |> knitr::kable()
 ```
 
-@tbl-llti indicates that, if everyone with a LLTI ceased to have one, the proportion of the population who are inactive for reasons of long-term sickness would be reduced by 60%. The proportion of the population in each of the other states, both economically inactive and active, would then increase. This includes a predicted 5.4% increase in unemployment, an 8.6% increase in long-term carers, and a 7.4% increase in those of working age who retire.
+The table produced indicates that, if everyone with a LLTI ceased to have one, the proportion of the population who are inactive for reasons of long-term sickness would be reduced by 60%. The proportion of the population in each of the other states, both economically inactive and active, would then increase. This includes a predicted 5.4% increase in unemployment, an 8.6% increase in long-term carers, and a 7.4% increase in those of working age who retire.
 
 The finding that removing LLTI would greatly decrease the economically inactive long-term sick population should, of course, not be surprising. We can interpret these results, broadly, as suggesting that the majority of inactivity due to long-term sickness is caused by LLTI. We might in fact consider the 40% or so who remain in this category even in a scenario in which no one has LLTI to be more surprising.
