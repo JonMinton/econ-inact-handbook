@@ -15,7 +15,7 @@ In the baseline scenario, the observed values of this binary variable, llti are 
 
 : AIC and BIC of model specifications
 
-```{r}
+```r
 #| cache: true
 
 devtools::load_all(here::here('R'))
@@ -57,7 +57,7 @@ df_ind_llti_standardised <-
 
 ```
 
-```{r}
+```r
 #| cache: true
 #| message: false
 #| warning: false
@@ -78,7 +78,7 @@ mod_llti <-
   )
 ```
 
-```{r}
+```r
 
 aics <- AIC(mod_00_llti, mod_llti)
 bics <- BIC(mod_00_llti, mod_llti)
@@ -95,7 +95,7 @@ aics |>
   knitr::kable()
 ```
 
-```{r}
+```r
 #| label: tbl-llti
 #| tbl-cap: Estimated effect of Limiting Long-term Illnesses (LLTI) on Economic (In)activity states 
 
